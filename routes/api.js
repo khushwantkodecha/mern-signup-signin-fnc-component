@@ -7,7 +7,7 @@ const users = require('../model/users');
 
 //for sign in of created user
 router.post('/signin', (req, res) => {
-	signUp.findOne({ email: req.body.email }).then((user) => {
+	users.findOne({ email: req.body.email }).then((user) => {
 		if (user) {
 			bcrypt.compare(req.body.password, user.password, (err, matched) => {
 				if (err) return err;

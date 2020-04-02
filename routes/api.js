@@ -3,8 +3,9 @@ const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
-const signUp = require('../model/signUp');
+const users = require('../model/users');
 
+//for sign in of created user
 router.post('/signin', (req, res) => {
 	signUp.findOne({ email: req.body.email }).then((user) => {
 		if (user) {
@@ -26,24 +27,29 @@ router.post('/signin', (req, res) => {
 	});
 });
 
-router.post('/signup', async (req, res) => {
-	try {
-		let data = req.body;
-		const hashedPassword = bcrypt.hashSync(data.password, 10);
-		data.password = hashedPassword;
-		data.confirm_password = hashedPassword;
-		function signupData() {
-			return new Promise((resolve, reject) => {
-				const newSignUp = new signUp(data);
-				resolve(newSignUp);
-			});
-		}
-		const resut = await signupData();
-		const savingData = await resut.save();
-		const savedData = await res.json(savingData);
-	} catch (err) {
-		res.status(500).json({ msg: 'Internal server error!!!' });
-	}
+//for crating a new user
+router.post('/signup', (req, res) => {
+	let data = req.body;
+	bcrypt
+		.hash(data.password, 10)
+		.then((hash) => {
+			data.password = hash;
+			data.confirm_password = hash;
+
+			const newUser = new users(data);
+
+			newUser
+				.save()
+				.then((savedUser) => {
+					res.json(savedUser);
+				})
+				.catch((err) => {
+					res.status(500).json({ msg: `Internal server error!!! ${err}` });
+				});
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 });
 
 module.exports = router;

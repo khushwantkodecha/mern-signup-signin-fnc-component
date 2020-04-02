@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function Signup() {
 	const [ first_name, setFirstName ] = useState('');
@@ -85,24 +85,6 @@ function Signup() {
 		setCofirmPasswordError('');
 	};
 
-	// const clearForm = () => {
-	//   this.setState({
-	//     first_name: "",
-	//     last_name: "",
-	//     email: "",
-	//     password: "",
-	//     confirm_password: ""
-	//   });
-	// };
-
-	useEffect(() => {
-		console.log(first_name);
-		console.log(last_name);
-		console.log(email);
-		console.log(password);
-		console.log(confirm_password);
-		// console.log(first_name);
-	});
 	return (
 		<div>
 			<div className="row">

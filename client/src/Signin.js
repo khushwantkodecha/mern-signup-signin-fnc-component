@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function Signin() {
 	const [ email, setEmail ] = useState('');
@@ -21,7 +21,7 @@ function Signin() {
 					? Swal.fire('Success', 'User logged in successfully!', 'success')
 					: Swal.fire('Opps...', 'Please enter correct password!', 'error');
 		} catch (e) {
-			console.log('data not saved');
+			console.log('error occured');
 		}
 	};
 

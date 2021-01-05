@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/khushwantkodecha/mern_dev_first_app#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.4.1",
     "concurrently": "^5.1.0",
